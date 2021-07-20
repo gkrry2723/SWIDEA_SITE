@@ -9,6 +9,6 @@
     <hr/>
     <span><a href="{}"> 삭제 </a></span>
     <span><a href="{% url "sites:idea_list" %}"> 목록 </a></span>
-    <span><a href="{}"> 수정 </a></span>
+    <span><a href="{% url "sites:idea_edit" idea.id %}"> 수정 </a></span>
 
 {% endblock %} 
