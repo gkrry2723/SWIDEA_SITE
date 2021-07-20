@@ -9,21 +9,21 @@
         <a href="{% url "sites:idea_detail" idea.id %}"><h3>{{ idea.title }}</h3></a>
         <h4> 개발 tool : {{ idea.devtool }}</h4>
         <h4> 관심도 : <p id="interest-{{idea.id}}">{{ idea.interest }}</p></h4>
-        <p>{{idea.id}}</p>
-        <button id="up-{{idea.id}}"  class = "btn-up"  name={{idea.id}}> ▲ </button>
-        <button id="down-{{idea.id}}" class = "btn-up" name={{idea.id}}> ▼ </button>
+        <button id="up-{{idea.id}}"  class = "btn-up" onclick="up( {{idea.id}} )" name={{idea.id}}> ▲ </button>
+        <button id="down-{{idea.id}}" class = "btn-down" onclick="down( {{idea.id}} )" name={{idea.id}}> ▼ </button>
         <hr/>
     {% endfor %}
 {% endblock %} 
 
 {% block js %}
 <script>
-    let button = document.querySelector(".btn-up")
-    
-    // 와 이거 진짜 애먹었다...
-    button.addEventListener('click', e =>{
-        let num = e.target.getAttribute('name');
+    // function으로 해야 모드 list에 버튼 누르기가 적용됨.. event listener는 불가
+    function up(num){
+        console.log("getin");
+        console.log(num);
+        //let num = this.target.getAttribute('name');
         let str = "#interest-"+num;
+        
         $.ajax({
             type: "POST",
             url: "/idea", 
@@ -43,7 +43,35 @@
                 alert('실패 ㅅㄱ')
             }
         })
-    });
+    }
+
+    function down(num){
+        console.log("getin");
+        console.log(num);
+        //let num = this.target.getAttribute('name');
+        let str = "#interest-"+num;
+        
+        $.ajax({
+            type: "POST",
+            url: "/idea", 
+            contentType: "application/json",
+            data: {
+                "csrfmiddlewaretoken": "{{ csrf_token }}",
+                'num' : num,
+                "str":str,
+            }, 
+            success: function(data){
+                let change = document.querySelector(str);
+                let current = parseInt(change.textContent, 10);
+                change.textContent = current - 1;
+                
+            },
+            error: function(){
+                alert('실패 ㅅㄱ')
+            }
+        })
+    }
+
 </script>
 
 {% endblock %}
