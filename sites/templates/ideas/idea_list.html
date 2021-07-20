@@ -1,0 +1,11 @@
+{%extends "layout.html"%} 
+{% block content %}
+    <h1>Idea Register</h1>
+    {% for idea in all_ideas %}
+        <img src = "{{ idea.image.url }}" height="300">
+        <h3>{{ idea.title }}</h3>
+        <p> {{ idea.devtool }}</p>
+        <p>{{ idea.interest }}</p>
+        <!-- js로 숫자 바꿔줘야할듯 -->
+    {% endfor %}
+{% endblock %} 
