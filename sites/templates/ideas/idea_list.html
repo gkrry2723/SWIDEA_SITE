@@ -3,7 +3,7 @@
     <h1>Idea Register</h1>
     {% for idea in all_ideas %}
         <img src = "{{ idea.image.url }}" height="300">
-        <h3>{{ idea.title }}</h3>
+        <a href="{% url "sites:idea_detail" idea.id %}"><h3>{{ idea.title }}</h3></a>
         <p> {{ idea.devtool }}</p>
         <p>{{ idea.interest }}</p>
         <!-- js로 숫자 바꿔줘야할듯 -->

@@ -1,0 +1,14 @@
+{%extends "layout.html"%} 
+{% block content %}
+    <h1>{{ idea.title }}</h1>
+
+    <img src = "{{ idea.image.url }}" height="300">
+    <h4> 내용 : </h4> {{idea.content}}
+    <h4> 관심도 : </h4> {{ idea.interest }}
+    <h4> 개발 tool : </h4> <a href="">{{ idea.devtool }}</a>
+    <hr/>
+    <span><a href="{}"> 삭제 </a></span>
+    <span><a href="{% url "sites:idea_list" %}"> 목록 </a></span>
+    <span><a href="{}"> 수정 </a></span>
+
+{% endblock %} 
