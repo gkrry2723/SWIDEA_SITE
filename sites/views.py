@@ -34,7 +34,7 @@ def idea_create(request):
         form = IdeaForm(request.POST, request.FILES)
         if form.is_valid():
             idea = form.save()
-            return redirect('sites:idea_list')
+            return redirect('sites:idea_detail', idea.pk)
     else:
         form = IdeaForm()
         ctx = {
@@ -86,8 +86,8 @@ def tool_create(request):
     if request.method == "POST":
         form = ToolForm(request.POST, request.FILES)
         if form.is_valid():
-            idea = form.save()
-            return redirect('sites:tool_list')
+            tool = form.save()
+            return redirect('sites:tool_detail', tool.pk)
     else:
         form = ToolForm()
         ctx = {
