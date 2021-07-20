@@ -49,3 +49,8 @@ def idea_edit(request,pk):
             }
         
         return render(request, template_name="ideas/idea_create.html", context = ctx)
+
+def idea_delete(request,pk):
+    idea = get_object_or_404(Idea, id=pk)
+    idea.delete()
+    return redirect('sites:idea_list')
