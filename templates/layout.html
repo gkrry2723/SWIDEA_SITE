@@ -9,12 +9,14 @@
     
     <ul>
         <li><a href= "{% url "sites:idea_create" %}">아이디어 등록</a></li>
-        <li><a href= "">아이디어 관리</a></li>
-        <li><a href= "">개발툴 등록</a></li>
-        <li><a href= "">개발툴 관리</a></li>
+        <li><a href= "{% url "sites:idea_list" %}">아이디어 관리</a></li>
+        <li><a href= "{% url "sites:tool_create" %}">개발툴 등록</a></li>
+        <li><a href= "{% url "sites:tool_list" %}">개발툴 관리</a></li>
     </ul>
 
     {% block content %}
     {% endblock %}
 </body>
+    {% block js %}
+    {% endblock %}
 </html> 

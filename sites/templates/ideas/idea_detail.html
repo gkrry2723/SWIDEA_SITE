@@ -3,9 +3,10 @@
     <h1>{{ idea.title }}</h1>
 
     <img src = "{{ idea.image.url }}" height="300">
-    <h4> 내용 : </h4> {{idea.content}}
-    <h4> 관심도 : </h4> {{ idea.interest }}
-    <h4> 개발 tool : </h4> <a href="">{{ idea.devtool }}</a>
+    <h4> 내용 : {{idea.content}} </h4> 
+    <h4> 관심도 : {{ idea.interest }}</h4> 
+    
+    <h4> 개발 tool : <a href="{% url "sites:tool_detail" tool_id %}">{{ idea.devtool }}</a></h4> 
     <hr/>
     <span><a href="{% url "sites:idea_delete" idea.id %}"> 삭제 </a></span>
     <span><a href="{% url "sites:idea_list" %}"> 목록 </a></span>

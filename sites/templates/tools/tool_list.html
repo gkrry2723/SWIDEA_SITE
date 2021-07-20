@@ -1,0 +1,10 @@
+{%extends "layout.html"%} 
+{% block content %}
+    <h1>Tool List</h1>
+    {% for tool in all_tools %}
+        <a href="{% url "sites:tool_detail" tool.id %}"><h3>{{ tool.name }}</h3></a>
+        <h4> 종류 :  {{ tool.kind }}</h4>
+        <h4> 설명 :  {{ tool.des }}</h4>
+        <hr/>
+    {% endfor %}
+{% endblock %} 

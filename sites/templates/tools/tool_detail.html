@@ -1,0 +1,19 @@
+{%extends "layout.html"%} 
+
+{% block content %}
+    <h1>{{ tool.name }}</h1>
+
+    <h4> 종류 :  {{ tool.kind }}</h4>
+    <h4> 설명 :  {{ tool.des }}</h4>
+    <h3>만들 수 있는 SW 목록</h3>
+    <ul>
+        {% for idea in ideas %}
+            <li><a href="{% url "sites:idea_detail" idea.id %}"> {{idea.title}} </a></li>
+        {% endfor %}
+    </ul>
+    <hr/>
+    <span><a href="{% url "sites:tool_delete" tool.id %}"> 삭제 </a></span>
+    <span><a href="{% url "sites:tool_list" %}"> 목록 </a></span>
+    <span><a href="{% url "sites:tool_edit" tool.id %}"> 수정 </a></span>
+
+{% endblock %} 
