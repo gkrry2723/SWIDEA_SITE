@@ -4,10 +4,13 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.urls.base import reverse
 from .models import Idea
 from .models import Tool
+from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
 
 # ------------------------------- idea -------------------------------
+
+@csrf_exempt
 def idea_list(request):
     all_ideas = Idea.objects.all()
     ctx = {

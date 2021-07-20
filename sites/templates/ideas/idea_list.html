@@ -9,36 +9,41 @@
         <a href="{% url "sites:idea_detail" idea.id %}"><h3>{{ idea.title }}</h3></a>
         <h4> 개발 tool : {{ idea.devtool }}</h4>
         <h4> 관심도 : <p id="interest-{{idea.id}}">{{ idea.interest }}</p></h4>
-        
-        <button id="up-{{idea.id}}" onclick=up({{ idea.id }}) name={{idea.id}}> ▲ </button>
-        <button id="down-{{idea.id}}" name={{idea.id}}> ▼ </button>
+        <p>{{idea.id}}</p>
+        <button id="up-{{idea.id}}"  class = "btn-up"  name={{idea.id}}> ▲ </button>
+        <button id="down-{{idea.id}}" class = "btn-up" name={{idea.id}}> ▼ </button>
         <hr/>
     {% endfor %}
 {% endblock %} 
 
 {% block js %}
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<script type="text/javascript">
-    function up(num){
-        console.log("get in 1");
-        let pk = num;
-
+<script>
+    let button = document.querySelector(".btn-up")
+    
+    // 와 이거 진짜 애먹었다...
+    button.addEventListener('click', e =>{
+        let num = e.target.getAttribute('name');
+        let str = "#interest-"+num;
         $.ajax({
-        type: "POST",
-        url: "/idea",
-        contentType: "application/json",
-        data: {
-            "pk": pk,
-            "csrfmiddlewaretoken": "{{ csrf_token }}", 
-        },
-        success: function (response) {
-            console.log("get in 2");
-            let change = $('#interest-' + num).val() +1;
-            console.log(change);
-            $('#interest-'+pk).val(change);
+            type: "POST",
+            url: "/idea", 
+            contentType: "application/json",
+            data: {
+                "csrfmiddlewaretoken": "{{ csrf_token }}",
+                'num' : num,
+                "str":str,
+            }, 
+            success: function(data){
+                let change = document.querySelector(str);
+                let current = parseInt(change.textContent, 10);
+                change.textContent = current + 1;
+                
+            },
+            error: function(){
+                alert('실패 ㅅㄱ')
             }
         })
-        console.log();
-    }
+    });
 </script>
+
 {% endblock %}
